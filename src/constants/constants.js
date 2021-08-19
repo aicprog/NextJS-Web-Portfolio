@@ -1,7 +1,7 @@
 // const img1 = require('../../out/images/p1.png').default
-import img1 from '../../out/images/p1.png';
-import img2 from '../../out/images/p2.png';
-import img3 from '../../out/images/p3.png';
+import img1 from '../../public/images/p1.png';
+import img2 from '../../public/images/p2.png';
+import img3 from '../../public/images/p3.png';
 
 export const projects = [
   {

@@ -1,6 +1,12 @@
 const withImages = require("next-images");
 
-module.exports = withImages();
+
+module.exports = withImages({
+    env: {
+        PUBLIC_URL: "https://your-organization-or-username.github.io/my-nextjs-app",
+        assetPrefix: './'
+      },
+});
 
 // module.exports = {
 //   module: {
@@ -25,3 +31,4 @@ module.exports = withImages();
 //     ],
 //   },
 // };
+
