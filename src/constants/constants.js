@@ -1,4 +1,3 @@
-// const img1 = require('../../out/images/p1.png').default
 import currencyWebsite from '../../public/images/p1.png';
 import travelWebsite from '../../public/images/p2.png';
 import comfortDepo from '../../public/images/comfort-depo.png';
