@@ -3,7 +3,7 @@ import travelWebsite from '../../public/images/p2.png';
 import comfortDepo from '../../public/images/comfort-depo.png';
 import astraClothing from '../../public/images/astra-clothing.png';
 
-export const projects = [
+export const projectsList = [
 	{
 		title: "Comfort Depo",
 		description:
@@ -39,7 +39,7 @@ export const projects = [
 		tags: ["React", "Styled Components", "Smooth Scroll"],
 		source: "https://github.com/aicprog/React-Currency-Website/tree/website",
 		visit: "https://aicprog.github.io/React-Currency-Website/",
-		id: 0,
+		id: 2,
 	},
 	{
 		title: "Travel Website",
@@ -49,7 +49,7 @@ export const projects = [
 		tags: ["Gatsby", "Styled Components", "GraphQL"],
 		source: "https://github.com/aicprog/Gatsby-Travel-Website/tree/master",
 		visit: "https://aicprog.github.io/Gatsby-Travel-Website/",
-		id: 1,
+		id: 3,
 	},
 
 	// {
