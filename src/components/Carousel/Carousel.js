@@ -3,24 +3,7 @@ import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import {projectsList} from "../../constants/constants";
 import styled from "styled-components";
 
-
-import {
-	BlogCard,
-	CardInfo,
-	ExternalLinks,
-	GridContainer,
-	HeaderThree,
-	Hr,
-	Tag,
-	TagList,
-	TitleContent,
-	UtilityList,
-	Img,
-	CardBottom,
-	Break,
-} from "../Projects/ProjectsStyles";
 import ProjectCard from "../ProjectCard/ProjectCard";
-import next from "next";
 
 const Carousel = () => {
 	const [projects, setProjects] = useState(projectsList);
@@ -169,6 +152,7 @@ const Section = styled.section`
 		text-transform: uppercase;
 		color: hsl(21, 62%, 45%);
 		margin-bottom: 0.25rem;
+		
 	}
 	.title {
 		text-transform: capitalize;
@@ -209,10 +193,11 @@ const Section = styled.section`
 		background: hsl(21, 62%, 45%);
 	}
 	.prev {
-		left: 0;
+		left: 0px;
 	}
 	.next {
 		right: 0;
+		
 	}
 	@media (min-width: 800px) {
 		.text {
@@ -237,6 +222,8 @@ const Section = styled.section`
 		grid-template-columns: 1fr 1fr;
 		column-gap: 2rem;
 		justify-items: center;
+		padding-left: 2.5rem;
+		padding-right: 2.5rem;
 	}
 	article.activeSlide {
 		opacity: 1;

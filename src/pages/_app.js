@@ -1,6 +1,4 @@
 import Theme from '../styles/theme';
-import Head from "next/head";
-
 
 
 
