@@ -60,8 +60,8 @@ export const projectsList = [
 
 export const TimeLineData = [
   { year: 2018, text: 'Started my journey, taking my first web classes at the Cal State LA', },
-  { year: 2019, text: 'Enrolled in online courses (coursera, udemy) to go beyond the fundamentals.', },
-  { year: 2020, text: 'Graduated from CalstateLA with a degree in Computer Science and began to learn react, redux, and styled-components'},
+  { year: 2019, text: 'Enrolled in online courses (coursera, udemy) to go beyond the fundamentals covered in my university classes.', },
+  { year: 2020, text: 'Graduated from CalstateLA with a Bachelors degree in Computer Science and began to learn react, redux, and styled-components'},
   { year: 2021, text: 'Continued learning but focused on coding more robust and functional projects', },
 
 ];
