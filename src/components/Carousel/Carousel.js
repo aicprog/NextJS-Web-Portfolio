@@ -31,7 +31,7 @@ const Carousel = () => {
 
 	const scrollRight = () => {
 
-		const element = document.getElementById('main-section');
+		//const element = document.getElementById('main-section');
 		const prevWidth = listRef.current.scrollLeft;
 
 

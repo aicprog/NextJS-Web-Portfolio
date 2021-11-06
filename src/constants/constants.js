@@ -3,7 +3,7 @@ import travelWebsite from '../../public/images/p2.png';
 import comfortDepo from '../../public/images/comfort-depo.png';
 import astraClothing from '../../public/images/astra-clothing.png';
 import gitHubSearch from '../../public/images/gitHub-search.png'
-import netflix from '../../public/images/netflix1.png'
+import netflix from '../../public/images/netflix.png'
 
 export const projectsList = [
 	{
