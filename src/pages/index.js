@@ -6,22 +6,28 @@ import Technologies from '../components/Technologies/Technologies';
 import Timeline from '../components/TimeLine/TimeLine';
 import { Layout } from '../layout/Layout';
 import { Section } from '../styles/GlobalComponents';
-
+import styled from 'styled-components';
 
 
 const Home = () => {
   return (
-    <Layout>
-      <Section grid>
-        <Hero />
-        <BgAnimation />
-      </Section>
-      <Timeline />
-      <Projects />
-      <Technologies />
-      <Acomplishments />
-    </Layout>
-  );
+		<Container>
+			<Layout>
+				<Section grid>
+					<Hero />
+					<BgAnimation />
+				</Section>
+				<Timeline />
+				<Projects />
+				<Technologies />
+				<Acomplishments />
+			</Layout>
+		</Container>
+	);
 };
 
 export default Home;
+
+const Container = styled.div`
+  overflow-x: hidden;
+`

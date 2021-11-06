@@ -31,7 +31,7 @@ export const projectsList = [
 		description:
 			'Using React, Redux, Sass, and Stripe for a e-commerce clothing website that is responsive and mobile-friendly. ',
 		image: netflix,
-		tags: ['React', 'Redux', 'SASS', 'Styled Components', 'Firebase'],
+		tags: ['React', 'Styled Components', 'TBDB API', "Axios"],
 		source: 'https://github.com/aicprog/Netflix-Clone',
 		visit: 'https://netflix-clone-web-app.netlify.app/',
 		id: 2,

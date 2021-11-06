@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const Boxes = styled.div`
-  width: 100%;
+  width: 90%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;

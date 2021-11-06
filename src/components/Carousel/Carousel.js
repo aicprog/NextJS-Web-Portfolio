@@ -12,9 +12,6 @@ const Carousel = () => {
 	const listRef = useRef(null)
 	const [scrollPosition, setScrollPosition] = useState(0);
 
-	//const [index, setIndex] = useState(0);
-	//const [indexTwo, setIndexTwo] = useState(1)
-	//const numOfSlidesSeen = 2
 	const scrollLeft = (e) => {
 	
 		if (listRef.current.scrollLeft <= scrollByValue) {
@@ -33,18 +30,10 @@ const Carousel = () => {
 
 
 	const scrollRight = () => {
-		const width = listRef.current.getBoundingClientRect().width;
-		console.log(listRef.current.scrollLeft, width);
 
-		if (listRef.current.scrollLeft >= width) {
-			scrollByValue = -listRef.current.offsetWidth - 500;
-		}
-		else{
-			scrollByValue = 500;
-		}
-		
-		//every time you scroll right, you set a new scrollPosition
-		//setScrollPosition(listRef.current.scrollLeft);
+		const element = document.getElementById('main-section');
+		const prevWidth = listRef.current.scrollLeft;
+
 
 		if (listRef.current) {
 			listRef.current.scrollBy({
@@ -54,16 +43,25 @@ const Carousel = () => {
 			});
 		}
 
+		
 		//every time you scroll right, you set a new scrollPosition
 		setScrollPosition(listRef.current.scrollLeft);
+		console.log("PREV", prevWidth, "SCROLL", scrollPosition);
+		if (scrollPosition > prevWidth - scrollByValue) {
+			listRef.current.scrollBy({
+				top: 0,
+				left: -scrollPosition - 500,
+				behavior: 'smooth',
+			});
+		}
 	};
 
 	return (
-		<Section >
+		<Section>
 			<div className="title"></div>
-			<Left className="prev" onClick={scrollLeft} />
-			<div className="section-center" ref={listRef}>
-				{projects.map((project, projectIndex) => {
+			<Left onClick={scrollLeft} />
+			<div className="section-center" id="main-section" ref={listRef}>
+				{projects.map((project) => {
 					return (
 						<article key={project.id}>
 							<ProjectCard {...project} />
@@ -71,7 +69,7 @@ const Carousel = () => {
 					);
 				})}
 			</div>
-			<Right className="next" onClick={scrollRight} />
+			<Right onClick={scrollRight} />
 		</Section>
 	);
 };
@@ -84,10 +82,8 @@ const Section = styled.section`
 	position: relative;
 	//overflow: hidden;
 
-	@media screen and (min-width: 992px) {
-		.section {
-			width: 80vw;
-		}
+	@media screen and (max-width: 1250px) {
+		width: 90%;
 	}
 
 	.title {
@@ -115,8 +111,13 @@ const Section = styled.section`
 		text-align: center;
 		display: flex;
 		overflow: hidden;
-		padding: 2rem;
+		padding: 1rem 4.5rem 1rem 4.5rem;
 		//padding-left: 100rem;
+
+		@media screen and (max-width: 1250px) {
+			padding-left: 0rem;
+			margin-right: 1rem;
+		}
 	}
 	.project-img {
 		border-radius: 50%;
@@ -150,46 +151,6 @@ const Section = styled.section`
 		color: hsl(21, 62%, 45%);
 	}
 
-	/* .prev {
-		opacity: 0;
-		
-		color: #fff;
-		font-size: 2rem;
-		transition: display 450ms;
-		position: absolute;
-		left: 0;
-		z-index: 1;
-		height: 80%;
-		background: rgba(20, 20, 20, 0.5);
-		border-radius: 5px;
-	} */
-	/* .prev,
-	.next {
-		position: absolute;
-		top: 600px;
-		transform: translateY(-50%);
-		background: hsl(210, 22%, 49%);
-		color: #fff;
-		width: 2.25rem;
-		height: 1.25rem;
-		display: grid;
-		place-items: center;
-		border-color: transparent;
-		font-size: 1rem;
-		border-radius: 0.25rem;
-		cursor: pointer;
-		transition: all 0.3s linear;
-	} */
-	.prev:hover,
-	.next:hover {
-		background: hsl(21, 62%, 45%);
-	}
-	.prev {
-		left: 0px;
-	}
-	.next {
-		right: 0;
-	}
 	@media (min-width: 800px) {
 		.text {
 			max-width: 45em;
@@ -222,28 +183,64 @@ const Section = styled.section`
 
 const Left = styled(AiOutlineLeft)`
 	position: absolute;
-	top: 50%;
+	top: 35%;
+	//background: hsl(210, 22%, 49%);
 	background: hsl(210, 22%, 49%);
+	opacity: 0.5;
 	color: #fff;
 	place-items: center;
 	border-color: transparent;
-	font-size: 1rem;
+	font-size: 3rem;
 	border-radius: 0.25rem;
 	cursor: pointer;
 	transition: all 0.3s linear;
 	z-index: 100;
+	left: 0;
+	height: 40%;
+
+	@media screen and (max-width: 1250px) {
+		height: 30%;
+	}
+
+	@media screen and (max-width: 800px) {
+		top: 40%;
+		height: 15%;
+	}
+
+	:hover {
+		background: hsl(21, 62%, 45%);
+	}
 `;
 
 const Right = styled(AiOutlineRight)`
 	position: absolute;
-	top: 50%;
+	top: 35%;
+	//background: hsl(210, 22%, 49%);
 	background: hsl(210, 22%, 49%);
+	opacity: 0.5;
 	color: #fff;
 	place-items: center;
 	border-color: transparent;
-	font-size: 1rem;
+	font-size: 3rem;
 	border-radius: 0.25rem;
 	cursor: pointer;
 	transition: all 0.3s linear;
 	z-index: 100;
+	right: 0px;
+	height: 40%;
+
+	@media screen and (max-width: 1250px) {
+		height: 30%;
+		right: -13px;
+	}
+
+	@media screen and (max-width: 800px) {
+		height: 15%;
+		top: 40%;
+	}
+
+	:hover {
+		background: hsl(21, 62%, 45%);
+		opacity: 1;
+	}
 `;
