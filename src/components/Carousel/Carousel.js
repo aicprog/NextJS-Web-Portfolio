@@ -1,100 +1,77 @@
-import React, { useState, useEffect } from "react";
-import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
+import React, { useState, useEffect, useRef } from "react";
+import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import {projectsList} from "../../constants/constants";
 import styled from "styled-components";
 
 import ProjectCard from "../ProjectCard/ProjectCard";
 
+
+let scrollByValue = 500;
 const Carousel = () => {
 	const [projects, setProjects] = useState(projectsList);
-	const [index, setIndex] = useState(0);
-	const [indexTwo, setIndexTwo] = useState(1)
-	const numOfSlidesSeen = 2
+	const listRef = useRef(null)
+	const [scrollPosition, setScrollPosition] = useState(0);
 
-    useEffect(() => {
-			const lastIndex = projects.length - 1;
-			if (index < 0) {
-				
-				setIndexTwo(lastIndex)
-				setIndex(lastIndex - 1);
-				//setIndexTwo(lastIndex - 1)
-			}
-			if (index > lastIndex) {
-				setIndex(0);
-				setIndexTwo(1)
-			}
-		}, [index, projects]);
-
-	const prev = () =>{
-		//Allows loop back in case you reach a case where you are at the end of the carousel and you click previous again, you won't get stuck at the last two indexes
-		if (index - (numOfSlidesSeen + 1) < 0 && index !== 0) {
-			console.log("PEV", index, indexTwo);
-			setIndex(0);
-			setIndexTwo(1);
-		} else {
-			setIndexTwo(index - numOfSlidesSeen);
-			setIndex(index - (numOfSlidesSeen + 1));
+	//const [index, setIndex] = useState(0);
+	//const [indexTwo, setIndexTwo] = useState(1)
+	//const numOfSlidesSeen = 2
+	const scrollLeft = (e) => {
+	
+		if (listRef.current.scrollLeft <= scrollByValue) {
+			setScrollPosition(0);
+		}
+		if (listRef.current) {
+			listRef.current.scrollBy({
+				top: 0,
+				left: -scrollByValue,
+				behavior: 'smooth',
+			});
 		}
 
-
-	}
-
-	const next = () =>{
-		setIndex(index + numOfSlidesSeen);
-		setIndexTwo(index + (numOfSlidesSeen + 1));
+		
 	}
 
 
+	const scrollRight = () => {
+		const width = listRef.current.getBoundingClientRect().width;
+		console.log(listRef.current.scrollLeft, width);
 
-		useEffect(() => {
-			let slider = setInterval(() => {
-				setIndex(index + 2);
-				setIndexTwo(index + 3);
-			}, 5000);
-			return () => {
-				clearInterval(slider);
-			};
-		}, [index]);
+		if (listRef.current.scrollLeft >= width) {
+			scrollByValue = -listRef.current.offsetWidth - 500;
+		}
+		else{
+			scrollByValue = 500;
+		}
+		
+		//every time you scroll right, you set a new scrollPosition
+		//setScrollPosition(listRef.current.scrollLeft);
+
+		if (listRef.current) {
+			listRef.current.scrollBy({
+				top: 0,
+				left: scrollByValue,
+				behavior: 'smooth',
+			});
+		}
+
+		//every time you scroll right, you set a new scrollPosition
+		setScrollPosition(listRef.current.scrollLeft);
+	};
 
 	return (
-		<Section>
-			<div className="title">
-			</div>
-			<div className="section-center">
+		<Section >
+			<div className="title"></div>
+			<Left className="prev" onClick={scrollLeft} />
+			<div className="section-center" ref={listRef}>
 				{projects.map((project, projectIndex) => {
-
-					let position = "nextSlide";
-
-
-					if (projectIndex === index) {
-						position = "activeSlide";
-
-					}
-					if (
-						projectIndex === projectIndex - 1 ||
-						(index === 0 && projectIndex === projects.length - 1)
-					) {
-						position = "lastSlide";
-					}
-
-					const nextProject = projects[indexTwo];
-
-
-				return (
-						<article className={position} key={project.id}>
-						<ProjectCard {...project} />
-						{index < projects.length - 1 && index >= 0 ? (
-							<ProjectCard {...nextProject} />
-							) : null}
-							</article>
-				);})}
-				<button className="prev" onClick={prev}>
-					<FiChevronLeft />
-				</button>
-				<button className="next" onClick={next}>
-					<FiChevronRight />
-				</button>
+					return (
+						<article key={project.id}>
+							<ProjectCard {...project} />
+						</article>
+					);
+				})}
 			</div>
+			<Right className="next" onClick={scrollRight} />
 		</Section>
 	);
 };
@@ -104,10 +81,12 @@ export default Carousel;
 const Section = styled.section`
 	width: 100%;
 	margin: 5rem auto;
+	position: relative;
+	//overflow: hidden;
 
 	@media screen and (min-width: 992px) {
 		.section {
-			width: 95vw;
+			width: 80vw;
 		}
 	}
 
@@ -130,14 +109,14 @@ const Section = styled.section`
 	.section-center {
 		margin: 0 auto;
 		margin-top: 4rem;
-		width: 90vw;
+		//width: 90vw;
 		height: 700px;
-		max-width: 1000px;
+		//max-width: 1000px;
 		text-align: center;
-		position: relative;
 		display: flex;
 		overflow: hidden;
-		justify-content: center;
+		padding: 2rem;
+		//padding-left: 100rem;
 	}
 	.project-img {
 		border-radius: 50%;
@@ -152,7 +131,6 @@ const Section = styled.section`
 		text-transform: uppercase;
 		color: hsl(21, 62%, 45%);
 		margin-bottom: 0.25rem;
-		
 	}
 	.title {
 		text-transform: capitalize;
@@ -171,14 +149,28 @@ const Section = styled.section`
 		margin-top: 1rem;
 		color: hsl(21, 62%, 45%);
 	}
-	.prev,
+
+	/* .prev {
+		opacity: 0;
+		
+		color: #fff;
+		font-size: 2rem;
+		transition: display 450ms;
+		position: absolute;
+		left: 0;
+		z-index: 1;
+		height: 80%;
+		background: rgba(20, 20, 20, 0.5);
+		border-radius: 5px;
+	} */
+	/* .prev,
 	.next {
 		position: absolute;
-		top: 200px;
+		top: 600px;
 		transform: translateY(-50%);
 		background: hsl(210, 22%, 49%);
 		color: #fff;
-		width: 1.25rem;
+		width: 2.25rem;
 		height: 1.25rem;
 		display: grid;
 		place-items: center;
@@ -187,7 +179,7 @@ const Section = styled.section`
 		border-radius: 0.25rem;
 		cursor: pointer;
 		transition: all 0.3s linear;
-	}
+	} */
 	.prev:hover,
 	.next:hover {
 		background: hsl(21, 62%, 45%);
@@ -197,7 +189,6 @@ const Section = styled.section`
 	}
 	.next {
 		right: 0;
-		
 	}
 	@media (min-width: 800px) {
 		.text {
@@ -211,16 +202,7 @@ const Section = styled.section`
 		}
 	}
 	article {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		opacity: 0;
-		transition: all 0.3s linear;
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		column-gap: 2rem;
+		display: flex;
 		justify-items: center;
 		padding-left: 2.5rem;
 		padding-right: 2.5rem;
@@ -238,4 +220,30 @@ const Section = styled.section`
 `;
 
 
+const Left = styled(AiOutlineLeft)`
+	position: absolute;
+	top: 50%;
+	background: hsl(210, 22%, 49%);
+	color: #fff;
+	place-items: center;
+	border-color: transparent;
+	font-size: 1rem;
+	border-radius: 0.25rem;
+	cursor: pointer;
+	transition: all 0.3s linear;
+	z-index: 100;
+`;
 
+const Right = styled(AiOutlineRight)`
+	position: absolute;
+	top: 50%;
+	background: hsl(210, 22%, 49%);
+	color: #fff;
+	place-items: center;
+	border-color: transparent;
+	font-size: 1rem;
+	border-radius: 0.25rem;
+	cursor: pointer;
+	transition: all 0.3s linear;
+	z-index: 100;
+`;

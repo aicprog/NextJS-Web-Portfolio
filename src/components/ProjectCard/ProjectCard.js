@@ -25,8 +25,8 @@ const ProjectCard = ({id, image, description, title, source, visit, tags}) => {
 					))}
 				</TagList>
 				<UtilityList>
-					<ExternalLinks href={visit}>Site</ExternalLinks>
-					<ExternalLinks href={source}>Code</ExternalLinks>
+					<ExternalLinks href={visit} target='_blank'>Site</ExternalLinks>
+					<ExternalLinks href={source} target='_blank'>Code</ExternalLinks>
 				</UtilityList>
 			</CardBottom>
 		</Card>

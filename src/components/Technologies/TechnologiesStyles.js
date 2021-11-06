@@ -143,7 +143,7 @@ export const SkillsContainer = styled.li`
     margin-left: 18px;
   }
 `
-export const SkillsList = styled.li`
+export const SkillsList = styled.ul`
   list-style-type: none;
   display: grid;
   grid-template-columns: repeat(3, 1fr);

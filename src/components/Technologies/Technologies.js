@@ -15,18 +15,7 @@ const Technologies = () => (
 		<br />
 		<br />
 		<SectionTitle>Skills</SectionTitle>
-		{/* <SectionText>
-        I've worked with a range of technologies in the web development world. 
-    </SectionText>
-    <List>
-      <ListItem>
-        <DiReact size="3rem"/>
-        <ListContainer>
-          <ListTitle>Front End</ListTitle>
-          <ListParagraph>React.js, Gatsby, NextJS</ListParagraph>
-        </ListContainer>
-      </ListItem>
-    </List> */}
+
 		<SkillsContainer>
 			<SkillsList>
 				<Skill>
