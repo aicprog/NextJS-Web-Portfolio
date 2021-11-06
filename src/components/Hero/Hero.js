@@ -13,7 +13,7 @@ const Hero = () => (
         Hi, I'm Adriany. <br/>
       </SectionTitle>
       <SectionText>
-      I am a Los Angeles based front-end web developer who cares deeply about user experience and new technologies. 
+      I am a Los Angeles based front-end web developer who cares deeply about user experience and utilizing new technologies. 
       </SectionText>
       
       <Button onClick={() => window.location='https://www.linkedin.com/in/acocom/'}>
