@@ -4,9 +4,11 @@ import { Section, SectionDivider, SectionTitle,} from '../../styles/GlobalCompon
 import  Carousel  from '../Carousel/Carousel';
 
 const Projects = () => (
-	<Section nopadding id="projects">
+	<Section id="projects">
 		<SectionDivider />
-		<SectionTitle main>Projects</SectionTitle>
+		<SectionTitle main center>
+			Projects
+		</SectionTitle>
 		<Carousel />
 	</Section>
 );
