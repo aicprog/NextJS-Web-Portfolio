@@ -1,19 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from 'react';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
-import {projectsList} from "../../constants/constants";
-import styled from "styled-components";
+import { projectsList } from '../../constants/constants';
+import styled from 'styled-components';
 
-import ProjectCard from "../ProjectCard/ProjectCard";
-
+import ProjectCard from '../ProjectCard/ProjectCard';
 
 let scrollByValue = 500;
 const Carousel = () => {
 	const [projects, setProjects] = useState(projectsList);
-	const listRef = useRef(null)
-	const [scrollPosition, setScrollPosition] = useState(0);
+	const listRef = useRef(null);
+	const [prevPosition, setPrevPosition] = useState(0);
 
 	const scrollLeft = (e) => {
-	
 		if (listRef.current.scrollLeft <= scrollByValue) {
 			setScrollPosition(0);
 		}
@@ -24,16 +22,11 @@ const Carousel = () => {
 				behavior: 'smooth',
 			});
 		}
-
-		
-	}
-
+	};
 
 	const scrollRight = () => {
-
 		//const element = document.getElementById('main-section');
-		const prevWidth = listRef.current.scrollLeft;
-
+		const currentWidth = listRef.current.scrollLeft;
 
 		if (listRef.current) {
 			listRef.current.scrollBy({
@@ -43,14 +36,12 @@ const Carousel = () => {
 			});
 		}
 
-		
 		//every time you scroll right, you set a new scrollPosition
-		setScrollPosition(listRef.current.scrollLeft);
-		console.log("PREV", prevWidth, "SCROLL", scrollPosition);
-		if (scrollPosition > prevWidth - scrollByValue) {
+		setPrevPosition(listRef.current.scrollLeft);
+		if (prevPosition > currentWidth - scrollByValue) {
 			listRef.current.scrollBy({
 				top: 0,
-				left: -scrollPosition - 500,
+				left: -prevPosition - scrollByValue,
 				behavior: 'smooth',
 			});
 		}
@@ -80,7 +71,6 @@ const Section = styled.section`
 	width: 100%;
 	margin: 5rem auto;
 	position: relative;
-	//overflow: hidden;
 
 	@media screen and (max-width: 1250px) {
 		width: 90%;
@@ -179,7 +169,6 @@ const Section = styled.section`
 		transform: translateX(100%);
 	}
 `;
-
 
 const Left = styled(AiOutlineLeft)`
 	position: absolute;
